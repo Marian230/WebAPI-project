@@ -10,7 +10,7 @@ namespace WebAPI.Models
     [Table("admin")]
     public class Admin
     {
-        [Key()]
+        [Column("id")]
         public int Id { get; set; }
 
         [Column("name")]
@@ -22,7 +22,7 @@ namespace WebAPI.Models
         [Column("Password")]
         public string Password { get; set; }
 
-        [Column("Email")]
+        [Column("e-mail")]
         public string Email { get; set; }
 
         [Column("phoneNumber")]

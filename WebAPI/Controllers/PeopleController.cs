@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     {
         private MyContext context = new MyContext();
 
-        // GET: api/People
+        /*// GET: api/People
         public IEnumerable<Person> Get()
         {
             return this.context.People;
@@ -50,6 +50,6 @@ namespace WebAPI.Controllers
 
             this.context.People.Remove(person);
             this.context.SaveChanges();
-        }
+        }*/
     }
 }
