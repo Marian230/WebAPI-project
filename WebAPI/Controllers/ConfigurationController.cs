@@ -7,8 +7,8 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class AdminController : ControllerTemplate<Admin>
+    public class ConfigurationController : ControllerTemplate<Configuration>
     {
-        public override DbSet DbSet => this.Context.Admins;
+        public override DbSet DbSet => this.Context.Configurations;
     }
 }

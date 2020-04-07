@@ -7,8 +7,8 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class AdminController : ControllerTemplate<Admin>
+    public class DestSourceController : ControllerTemplate<DestSource>
     {
-        public override DbSet DbSet => this.Context.Admins;
+        public override DbSet DbSet => this.Context.DestSources;
     }
 }

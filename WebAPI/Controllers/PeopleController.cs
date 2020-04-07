@@ -12,8 +12,8 @@ namespace WebAPI.Controllers
     {
         private MyContext context = new MyContext();
 
-        /*// GET: api/People
-        public IEnumerable<Person> Get()
+        // GET: api/People
+        /*public IEnumerable<Person> Get()
         {
             return this.context.People;
         }

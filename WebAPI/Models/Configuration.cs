@@ -25,10 +25,10 @@ namespace WebAPI.Models
         [Column("cron")]
         public string Cron { get; set; }
 
-        [Column("RepeatableBackup")]
+        [Column("repeatableBackup")]
         public bool RepeatableBackup { get; set; }
 
-        [Column("savedBackupNumber")]
+        [Column("savedBackupsNumber")]
         public int SavedBackupNumber { get; set; }
     }
 }
