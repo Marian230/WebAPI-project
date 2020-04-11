@@ -18,5 +18,7 @@ namespace WebAPI.Models
 
         [Column("clientHistoryIntervalUnits")]
         public int ClientHistoryIntervalUnits { get; set; }
+
+        public Setting Setting { get; set; }
     }
 }

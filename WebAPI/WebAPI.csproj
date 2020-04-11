@@ -189,8 +189,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\ControllerTemplate.cs" />
+    <Compile Include="Controllers\DestFtpServerController.cs" />
     <Compile Include="Controllers\DestSourceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
@@ -208,7 +210,7 @@
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\MyContext.cs" />
     <Compile Include="Models\Schedule.cs" />
-    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\SettingsClient.cs" />
     <Compile Include="Models\SettingsMail.cs" />
     <Compile Include="Models\Source.cs" />

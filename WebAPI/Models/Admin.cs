@@ -10,7 +10,7 @@ namespace WebAPI.Models
     [Table("admin")]
     public class Admin
     {
-        [Column("id")]
+        [Key()]
         public int Id { get; set; }
 
         [Column("name")]
@@ -27,5 +27,7 @@ namespace WebAPI.Models
 
         [Column("phoneNumber")]
         public string PhoneNumber { get; set; }
+
+        //public Setting Setting { get; set; }
     }
 }

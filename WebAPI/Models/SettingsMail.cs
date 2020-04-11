@@ -18,5 +18,7 @@ namespace WebAPI.Models
 
         [Column("cron")]
         public string Cron { get; set; }
+
+        public Setting Setting { get; set; }
     }
 }

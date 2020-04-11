@@ -18,5 +18,11 @@ namespace WebAPI.Models
 
         [Column("idConfiguration")]
         public int IdConfiguration { get; set; }
+
+        /*public Schedule Schedule { get; set; }
+
+        public Client Client { get; set; }
+
+        public Configuration Configuration { get; set; }*/
     }
 }

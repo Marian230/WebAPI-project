@@ -27,5 +27,7 @@ namespace WebAPI.Models
 
         [Column("fileSuffix")]
         public string FileSuffix { get; set; }
+
+        public DestSource DestSource { get; set; }
     }
 }

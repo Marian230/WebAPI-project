@@ -15,5 +15,7 @@ namespace WebAPI.Models
 
         [Column("path")]
         public string Path { get; set; }
+
+        public DestSource DestSource { get; set; }
     }
 }

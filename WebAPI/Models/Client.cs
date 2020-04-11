@@ -24,5 +24,7 @@ namespace WebAPI.Models
 
         [Column("dateOfLogin")]
         public DateTime DateOfLogin { get; set; }
+
+        public List<Job> Jobs { get; set; }
     }
 }

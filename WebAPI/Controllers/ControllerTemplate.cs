@@ -8,38 +8,52 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public abstract class ControllerTemplate<T> : ApiController
+    public abstract class ControllerTemplate<T> : ApiController where T : class
     {
         public abstract DbSet DbSet { get; }
 
         protected MyContext Context { get; set; } = new MyContext();
 
-        public IEnumerable<T> Get() // Return all
+        public virtual IEnumerable<T> Get() // Return all
         {
             return (this.DbSet as IEnumerable<T>);
         }
 
-        public T Get(int Id) // Return specific
+        public virtual T Get(int Id) // Return specific
         {
             return (T)this.DbSet.Find(Id);
         }
 
-        public void Post([FromBody]T item) // Add
+        public virtual void Post([FromBody]T item) // Add
         {
+            if (item == null)
+                return;
+
             this.DbSet.Add(item);
             this.Context.SaveChanges();
-        }
+        }  
 
-        public void Put(int id, T newItem) // Edit, tohle předělat
+        public virtual void Put(T item, int id) // Edit
         {
-            T item = (T)this.DbSet.Find(id);
-            item = newItem;
+            if (item == null)
+                return;
+
+            T tmp = Context.Set<T>().Find(id);
+
+            if (tmp == null)
+                return;
+
+            this.Context.Entry(tmp).CurrentValues.SetValues(item);
             this.Context.SaveChanges();
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             T item = (T)this.DbSet.Find(id);
+
+            if (item == null)
+                return;
+
             this.Context.Set(typeof(T)).Remove(item);
             this.Context.SaveChanges();
         }

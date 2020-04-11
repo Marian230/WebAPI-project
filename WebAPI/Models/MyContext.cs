@@ -26,7 +26,7 @@ namespace WebAPI.Models
 
         public DbSet<Job> Jobs { get; set; }
 
-        public DbSet<Settings> Settings { get; set; }
+        public DbSet<Setting> Settings { get; set; }
 
         public DbSet<SettingsClient> SettingsClients { get; set; }
 

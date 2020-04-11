@@ -18,5 +18,7 @@ namespace WebAPI.Models
 
         [Column("errorCode")]
         public string ErrorCode { get; set; }
+
+       // public Job Job { get; set; }
     }
 }

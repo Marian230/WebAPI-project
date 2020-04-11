@@ -8,7 +8,7 @@ using System.Web;
 namespace WebAPI.Models
 {
     [Table("settings")]
-    public class Settings
+    public class Setting
     {
         [Key()]
         public int Id { get; set; }
@@ -18,5 +18,11 @@ namespace WebAPI.Models
 
         [Column("defaultMenuTable")]
         public int DefaultMenuTable { get; set; }
+
+        /*public Admin Admin { get; set; }
+
+        public SettingsMail SettingsMail { get; set; }
+
+        public SettingsClient SettingsClient { get; set; }*/
     }
 }

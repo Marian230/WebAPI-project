@@ -15,5 +15,15 @@ namespace WebAPI.Models
 
         [Column("idConfiguration")]
         public int IdConfiguration { get; set; }
+
+        //public Configuration Configuration { get; set; }
+
+        public List<Source> Sources { get; set; }
+
+        public List<DestFtpServer> DestFtpServers { get; set; }
+
+        public List<DestGoogleDrive> DestGoogleDrives { get; set; }
+
+        public List<DestLocal> DestLocals { get; set; }
     }
 }
