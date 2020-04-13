@@ -193,9 +193,15 @@
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\ControllerTemplate.cs" />
     <Compile Include="Controllers\DestFtpServerController.cs" />
+    <Compile Include="Controllers\DestGoogleDriveController.cs" />
+    <Compile Include="Controllers\JobController.cs" />
+    <Compile Include="Controllers\DestLocalController.cs" />
     <Compile Include="Controllers\DestSourceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PeopleController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\SettingsClientController.cs" />
+    <Compile Include="Controllers\SettingsMailController.cs" />
     <Compile Include="Controllers\SourceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
