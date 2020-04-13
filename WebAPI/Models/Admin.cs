@@ -24,7 +24,5 @@ namespace WebAPI.Models
 
         [Column("phoneNumber")]
         public string PhoneNumber { get; set; }
-
-        //public Setting Setting { get; set; }
     }
 }

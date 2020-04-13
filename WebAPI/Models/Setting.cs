@@ -15,11 +15,5 @@ namespace WebAPI.Models
 
         [Column("defaultMenuTable")]
         public int DefaultMenuTable { get; set; }
-
-        /*public Admin Admin { get; set; }
-
-        public SettingsMail SettingsMail { get; set; }
-
-        public SettingsClient SettingsClient { get; set; }*/
     }
 }

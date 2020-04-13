@@ -27,9 +27,5 @@ namespace WebAPI.Models
 
         [Column("savedBackupsNumber")]
         public int SavedBackupNumber { get; set; }
-
-        //public DestSource DestSource { get; set; }
-
-        //public List<Job> Jobs { get; set; }
     }
 }

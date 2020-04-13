@@ -11,17 +11,15 @@ namespace WebAPI.Models
     public class Job : ModelTemplate
     {
         [Column("idClient")]
-        public int idClient { get; set; }
+        public int IdClient { get; set; }
 
         [Column("idConfiguration")]
-        public int idConfiguration { get; set; }
+        public int IdConfiguration { get; set; }
 
-        /*public Schedule Schedule { get; set; }*/
-
-        [ForeignKey("idClient")]
+        [ForeignKey("IdClient")]
         public Client Client { get; set; }
 
-        [ForeignKey("idConfiguration")]
+        [ForeignKey("IdConfiguration")]
         public Configuration Configuration { get; set; }
     }
 }
