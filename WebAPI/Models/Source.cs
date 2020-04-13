@@ -7,15 +7,15 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("source")]
-    public class Source
+    [Table("tbSource")]
+    public class Source : ModelTemplate
     {
-        [Key()]
         public int IdDestSource { get; set; }
 
         [Column("path")]
         public string Path { get; set; }
 
+        [ForeignKey("IdDestSource")]
         public DestSource DestSource { get; set; }
     }
 }

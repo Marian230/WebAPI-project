@@ -7,22 +7,21 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("job")]
-    public class Job
+    [Table("tbJob")]
+    public class Job : ModelTemplate
     {
-        [Key()]
-        public int Id { get; set; }
-
         [Column("idClient")]
-        public int IdClient { get; set; }
+        public int idClient { get; set; }
 
         [Column("idConfiguration")]
-        public int IdConfiguration { get; set; }
+        public int idConfiguration { get; set; }
 
-        /*public Schedule Schedule { get; set; }
+        /*public Schedule Schedule { get; set; }*/
 
+        [ForeignKey("idClient")]
         public Client Client { get; set; }
 
-        public Configuration Configuration { get; set; }*/
+        [ForeignKey("idConfiguration")]
+        public Configuration Configuration { get; set; }
     }
 }

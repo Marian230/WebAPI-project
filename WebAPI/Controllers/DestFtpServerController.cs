@@ -7,7 +7,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public class DestFtpServerController : ControllerTemplate<DestFtpServerController>
+    public class DestFtpServerController : ControllerTemplate<DestFtpServer>
     {
         public override DbSet DbSet => this.Context.DestFtpServers;
     }

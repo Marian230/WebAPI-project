@@ -7,12 +7,9 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("configuration")]
-    public class Configuration
+    [Table("tbConfiguration")]
+    public class Configuration : ModelTemplate
     {
-        [Key()]
-        public int Id { get; set; }
-
         [Column("name")]
         public string Name { get; set; }
 
@@ -20,7 +17,7 @@ namespace WebAPI.Models
         public string Description { get; set; }
 
         [Column("backupType")]
-        public string BackupTime { get; set; }
+        public string BackupType { get; set; }
 
         [Column("cron")]
         public string Cron { get; set; }
@@ -33,6 +30,6 @@ namespace WebAPI.Models
 
         //public DestSource DestSource { get; set; }
 
-        public List<Job> Jobs { get; set; }
+        //public List<Job> Jobs { get; set; }
     }
 }

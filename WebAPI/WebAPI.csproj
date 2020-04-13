@@ -214,6 +214,7 @@
     <Compile Include="Models\DestLocal.cs" />
     <Compile Include="Models\DestSource.cs" />
     <Compile Include="Models\Job.cs" />
+    <Compile Include="Models\ModelTemplate.cs" />
     <Compile Include="Models\MyContext.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Setting.cs" />

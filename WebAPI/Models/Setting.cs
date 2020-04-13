@@ -7,12 +7,9 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("settings")]
-    public class Setting
+    [Table("tbSettings")]
+    public class Setting : ModelTemplate
     {
-        [Key()]
-        public int Id { get; set; }
-
         [Column("IdAdmin")]
         public int IdAdmin { get; set; }
 

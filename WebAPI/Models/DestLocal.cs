@@ -7,10 +7,10 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("destLocal")]
-    public class DestLocal
+    [Table("tbDestLocal")]
+    public class DestLocal : ModelTemplate
     {
-        [Key()]
+        [ForeignKey("DestSource")]
         public int IdDestSource { get; set; }
 
         [Column("path")]

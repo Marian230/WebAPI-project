@@ -7,10 +7,9 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("settingsClient")]
-    public class SettingsClient
+    [Table("tbSettingsClient")]
+    public class SettingsClient : ModelTemplate
     {
-        [Key()]
         public int IdSettings { get; set; }
 
         [Column("clientHistoryInterval")]
@@ -19,6 +18,7 @@ namespace WebAPI.Models
         [Column("clientHistoryIntervalUnits")]
         public int ClientHistoryIntervalUnits { get; set; }
 
+        [ForeignKey("IdSettings")]
         public Setting Setting { get; set; }
     }
 }

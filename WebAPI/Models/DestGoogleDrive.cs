@@ -7,10 +7,9 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("destGoogleDrive")]
-    public class DestGoogleDrive
+    [Table("tbDestGoogleDrive")]
+    public class DestGoogleDrive : ModelTemplate
     {
-        [Key()]
         public int IdDestSource { get; set; }
 
         [Column("gmail")]
@@ -25,6 +24,7 @@ namespace WebAPI.Models
         [Column("fileSuffix")]
         public string fileSuffix { get; set; }
 
+        [ForeignKey("IdDestSource")]
         public DestSource DestSource { get; set; }
     }
 }

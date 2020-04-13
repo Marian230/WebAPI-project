@@ -7,12 +7,9 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("clients")]
-    public class Client
+    [Table("tbClients")]
+    public class Client : ModelTemplate
     {
-        [Key()]
-        public int Id { get; set; }
-
         [Column("name")]
         public string Name { get; set; }
 
@@ -25,6 +22,6 @@ namespace WebAPI.Models
         [Column("dateOfLogin")]
         public DateTime DateOfLogin { get; set; }
 
-        public List<Job> Jobs { get; set; }
+        //public List<Job> Jobs { get; set; }
     }
 }

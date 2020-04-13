@@ -7,10 +7,9 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("schedule")]
-    public class Schedule
+    [Table("tbSchedule")]
+    public class Schedule : ModelTemplate
     {
-        [Key()]
         public int IdJob { get; set; }
 
         [Column("backupDate")]
@@ -19,6 +18,7 @@ namespace WebAPI.Models
         [Column("errorCode")]
         public string ErrorCode { get; set; }
 
-       // public Job Job { get; set; }
+        [ForeignKey("IdJob")]
+        public Job Job { get; set; }
     }
 }

@@ -7,10 +7,9 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("settingsMail")]
-    public class SettingsMail
+    [Table("tbSettingsMail")]
+    public class SettingsMail : ModelTemplate
     {
-        [Key()]
         public int IdSettings { get; set; }
 
         [Column("sendMail")]
@@ -19,6 +18,7 @@ namespace WebAPI.Models
         [Column("cron")]
         public string Cron { get; set; }
 
+        [ForeignKey("IdSettings")]
         public Setting Setting { get; set; }
     }
 }

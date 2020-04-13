@@ -7,10 +7,9 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("destFtpServer")]
-    public class DestFtpServer
+    [Table("tbDestFtpServer")]
+    public class DestFtpServer : ModelTemplate
     {
-        [Key()]
         public int IdDestSource { get; set; }
 
         [Column("site")]
@@ -28,6 +27,7 @@ namespace WebAPI.Models
         [Column("fileSuffix")]
         public string FileSuffix { get; set; }
 
+        [ForeignKey("IdDestSource")]
         public DestSource DestSource { get; set; }
     }
 }

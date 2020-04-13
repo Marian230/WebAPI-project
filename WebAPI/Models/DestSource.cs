@@ -7,23 +7,20 @@ using System.Web;
 
 namespace WebAPI.Models
 {
-    [Table("destSource")]
-    public class DestSource
+    [Table("tbDestSource")]
+    public class DestSource : ModelTemplate
     {
-        [Key()]
-        public int Id { get; set; }
-
         [Column("idConfiguration")]
         public int IdConfiguration { get; set; }
 
         //public Configuration Configuration { get; set; }
 
-        public List<Source> Sources { get; set; }
+        /*public List<Source> Sources { get; set; }
 
         public List<DestFtpServer> DestFtpServers { get; set; }
 
         public List<DestGoogleDrive> DestGoogleDrives { get; set; }
 
-        public List<DestLocal> DestLocals { get; set; }
+        public List<DestLocal> DestLocals { get; set; }*/
     }
 }

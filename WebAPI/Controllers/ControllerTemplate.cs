@@ -8,7 +8,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    public abstract class ControllerTemplate<T> : ApiController where T : class
+    public abstract class ControllerTemplate<T> : ApiController where T : ModelTemplate
     {
         public abstract DbSet DbSet { get; }
 
@@ -33,12 +33,12 @@ namespace WebAPI.Controllers
             this.Context.SaveChanges();
         }  
 
-        public virtual void Put(T item, int id) // Edit
+        public virtual void Put(T item) // Edit
         {
             if (item == null)
                 return;
 
-            T tmp = Context.Set<T>().Find(id);
+            T tmp = Context.Set<T>().Find(item.Id);
 
             if (tmp == null)
                 return;
