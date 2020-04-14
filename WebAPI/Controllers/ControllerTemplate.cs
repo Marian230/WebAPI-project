@@ -57,5 +57,23 @@ namespace WebAPI.Controllers
             this.Context.Set(typeof(T)).Remove(item);
             this.Context.SaveChanges();
         }
+
+        [HttpGet]
+        [Route("api/main")]
+        public virtual object HomeQuery()
+        {
+            return (from cl in Context.Clients
+                    join j in Context.Jobs on cl.Id equals j.IdClient
+                    join c in Context.Configurations on j.IdConfiguration equals c.Id
+                    select new
+                    {
+                        CLName = cl.Name,
+                        COname = c.Name,
+                        Desc = c.Description
+                    }).ToList();
+
+            //string json = Newtonsoft.Json.JsonConvert.SerializeObject(query, Newtonsoft.Json.Formatting.Indented);
+            //return json;
+        }
     }
 }
