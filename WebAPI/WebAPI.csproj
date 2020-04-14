@@ -198,6 +198,7 @@
     <Compile Include="Controllers\DestLocalController.cs" />
     <Compile Include="Controllers\DestSourceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\SettingsClientController.cs" />

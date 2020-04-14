@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\WebAPI",
+    "\\WebAPI\\Controllers",
+    "\\WebAPI\\Models"
   ],
+  "SelectedNode": "\\WebAPI\\Controllers\\ControllerTemplate.cs",
   "PreviewInSolutionExplorer": false
 }
