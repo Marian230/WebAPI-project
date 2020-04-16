@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -28,28 +29,48 @@ namespace WebAPI.Controllers
         [HttpGet]
         public virtual object ClientQuery()
         {
-            //var testx = new JwtSecurityToken();
-
             var query = (from j in Context.Jobs
-                         join c in Context.Configurations on j.IdConfiguration equals c.Id
+                         join co in Context.Configurations on j.IdConfiguration equals co.Id
                          select new
                          {
                              IdClient = j.IdClient,
                              IdConfiguration = j.IdConfiguration,
-                             Name = c.Name
+                             Name = co.Name
                          });
 
-            return (from c in Context.Clients
-                    join q in query on c.Id equals q.IdClient into leftOrder
-                    from order in leftOrder.DefaultIfEmpty()
-                    select new
-                    {
-                        ID = c.Id,
-                        Name = c.Name,
-                        IP = c.IP,
-                        MAC = c.MAC,
-                        Configuration = (order == null ? String.Empty : order.Name)
-                    }).ToList();
+            var myQuery = Context.Clients.GroupJoin(
+                query,
+                client => client.Id,
+                q => q.IdClient,
+                (client, q) => new
+                {
+                    Client = client,
+                    Configuration = q
+                })
+                .SelectMany(
+                x => x.Configuration.DefaultIfEmpty(),
+                (x, y) => new
+                {
+                    ID = x.Client.Id,
+                    Name = x.Client.Name,
+                    IP = x.Client.IP,
+                    MAC = x.Client.MAC,
+                    Configuration = (y == null ? String.Empty : y.Name)
+                });
+
+            var returnQuery = myQuery
+                .GroupBy(client => client.ID)
+                .ToList()
+                .Select(eg => new
+                {
+                    ID = eg.Key,
+                    Name = eg.First().Name,
+                    IP = eg.First().IP,
+                    MAC = eg.First().MAC,
+                    Configuration = string.Join(",", eg.Select(i => i.Configuration))
+                });
+
+            return returnQuery;
         }
     }
 }

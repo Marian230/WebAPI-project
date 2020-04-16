@@ -42,13 +42,13 @@ namespace WebAPI.Models
                 //Convert the string into an string array
                 string[] usernamePasswordArray = decodedAuthenticationToken.Split(':');
                 //First element of the array is the username
-                string username = usernamePasswordArray[0];
+                string email = usernamePasswordArray[0];
                 //Second element of the array is the password
                 string password = usernamePasswordArray[1];
                 //call the login method to check the username and password
-                if (AdminValidate.Login(username, password))
+                if (AdminValidate.Login(email, password))
                 {
-                    var identity = new GenericIdentity(username);
+                    var identity = new GenericIdentity(email);
                     IPrincipal principal = new GenericPrincipal(identity, null);
                     Thread.CurrentPrincipal = principal;
                     if (HttpContext.Current != null)

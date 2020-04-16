@@ -9,11 +9,11 @@ namespace WebAPI.Models
     {
         static MyContext context = new MyContext();
 
-        public static bool Login(string username, string password)
+        public static bool Login(string email, string password)
         {
-            return context.Admins.Any(user =>
-                user.Name.Equals(username, StringComparison.OrdinalIgnoreCase)
-                && user.Password == password);
+            return context.Admins.Any(admin =>
+                admin.Email.Equals(email, StringComparison.OrdinalIgnoreCase)
+                && admin.Password == password);
         }
     }
 }
