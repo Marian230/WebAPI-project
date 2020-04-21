@@ -8,11 +8,13 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [RoutePrefix("api/query")]
     public class QueryController : ApiController
     {
         private MyContext Context = new MyContext();
 
         [HttpGet]
+        [Route("homequery")]
         public virtual object HomeQuery()
         {
             return (from cl in Context.Clients
@@ -27,6 +29,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        [Route("clientquery")]
         public virtual object ClientQuery()
         {
             var query = (from j in Context.Jobs

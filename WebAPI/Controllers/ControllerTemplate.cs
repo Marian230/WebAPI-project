@@ -8,23 +8,30 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [RoutePrefix("api/{controller}")]
     public abstract class ControllerTemplate<T> : ApiController where T : ModelTemplate
     {
         public abstract DbSet DbSet { get; }
 
         protected MyContext Context { get; set; } = new MyContext();
 
+        [HttpGet]
+        [Route("")]
         public virtual IEnumerable<T> Get() // Return all
         {
             return (this.DbSet as IEnumerable<T>);
         }
 
+        [HttpGet]
+        [Route("id:int")]
         public virtual T Get(int Id) // Return specific
         {
             return (T)this.DbSet.Find(Id);
         }
 
-        public virtual void Post([FromBody]T item) // Add
+        [HttpPost]
+        [Route("item:T")]
+        public virtual void Post(T item) // Add
         {
             if (item == null)
                 return;
@@ -33,6 +40,8 @@ namespace WebAPI.Controllers
             this.Context.SaveChanges();
         }  
 
+        [HttpPut]
+        [Route("item:T")]
         public virtual void Put(T item) // Edit
         {
             if (item == null)
@@ -47,6 +56,8 @@ namespace WebAPI.Controllers
             this.Context.SaveChanges();
         }
 
+        [HttpDelete]
+        [Route("id:int")]
         public virtual void Delete(int id)
         {
             T item = (T)this.DbSet.Find(id);
