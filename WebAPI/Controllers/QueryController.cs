@@ -22,6 +22,7 @@ namespace WebAPI.Controllers
                     join c in Context.Configurations on j.IdConfiguration equals c.Id
                     select new
                     {
+                        Id = cl.Id,
                         CLName = cl.Name,
                         COName = c.Name,
                         Desc = c.Description
@@ -66,7 +67,7 @@ namespace WebAPI.Controllers
                 .ToList()
                 .Select(eg => new
                 {
-                    ID = eg.Key,
+                    Id = eg.Key,
                     Name = eg.First().Name,
                     IP = eg.First().IP,
                     MAC = eg.First().MAC,
@@ -74,6 +75,43 @@ namespace WebAPI.Controllers
                 });
 
             return returnQuery;
+        }
+
+        [HttpGet]
+        [Route("completedbackups")]
+        public virtual object CompletedBackupsQuery()
+        {
+            return (from job in Context.Jobs
+                    join schedule in Context.Schedules on job.Id equals schedule.IdJob
+                    join configuration in Context.Configurations on job.IdConfiguration equals configuration.Id
+                    join client in Context.Clients on job.IdClient equals client.Id
+                    where schedule.BackupDate < DateTime.Now
+                    select new
+                    {
+                        Datum = schedule.BackupDate,
+                        ClientName = client.Name,
+                        ConfigurationName = configuration.Name,
+                        Description = configuration.Description, 
+                        Error = schedule.ErrorCode
+                    }).ToList();
+        }
+
+        [HttpGet]
+        [Route("ongoingbackups")]
+        public virtual object OngoingBackupsQuery()
+        {
+            return (from job in Context.Jobs
+                    join schedule in Context.Schedules on job.Id equals schedule.IdJob
+                    join configuration in Context.Configurations on job.IdConfiguration equals configuration.Id
+                    join client in Context.Clients on job.IdClient equals client.Id
+                    where schedule.BackupDate >= DateTime.Now
+                    select new
+                    {
+                        Datum = schedule.BackupDate,
+                        ClientName = client.Name,
+                        ConfigurationName = configuration.Name,
+                        Description = configuration.Description
+                    }).ToList();
         }
     }
 }
