@@ -20,6 +20,6 @@ namespace WebAPI.Models
         public string MAC { get; set; }
 
         [Column("dateOfLogin")]
-        public DateTime DateOfLogin { get; set; }
+        public DateTime? DateOfLogin { get; set; }
     }
 }

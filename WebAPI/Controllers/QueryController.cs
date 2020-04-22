@@ -111,7 +111,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("imcomingbackupsQuery")]
+        [Route("incomingbackups")]
         public virtual object IncomingBackupsQuery()
         {
             return Context.Schedules
@@ -126,6 +126,13 @@ namespace WebAPI.Controllers
                     ConfigurationName = schedule.Job.Configuration.Name,
                     schedule.Job.Configuration.Description
                 });
+        }
+
+        [HttpGet]
+        [Route("newclients")]
+        public virtual object NewClients()
+        {
+            return Context.Clients.Where(client => client.DateOfLogin == null).ToList();
         }
     }
 }
