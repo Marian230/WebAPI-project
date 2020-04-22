@@ -81,7 +81,7 @@ namespace WebAPI.Controllers
         [Route("completedbackups")]
         public virtual object CompletedBackupsQuery()
         {
-            return (from job in Context.Jobs
+            /*return (from job in Context.Jobs
                     join schedule in Context.Schedules on job.Id equals schedule.IdJob
                     join configuration in Context.Configurations on job.IdConfiguration equals configuration.Id
                     join client in Context.Clients on job.IdClient equals client.Id
@@ -93,25 +93,39 @@ namespace WebAPI.Controllers
                         ConfigurationName = configuration.Name,
                         Description = configuration.Description, 
                         Error = schedule.ErrorCode
-                    }).ToList();
+                    }).ToList();*/
+
+            return Context.Schedules
+                .Where(schedule => schedule.IdJob == schedule.Job.Id)
+                .Where(schedule => schedule.Job.Configuration.Id == schedule.Job.IdConfiguration)
+                .Where(Schedule => Schedule.Job.Client.Id == Schedule.Job.IdClient)
+                .Where(schedule => schedule.BackupDate < DateTime.Now)
+                .Select(schedule => new
+                {
+                    Datum = schedule.BackupDate,
+                    ClientName = schedule.Job.Client.Name,
+                    ConfigurationName = schedule.Job.Configuration.Name,
+                    schedule.Job.Configuration.Description,
+                    Error = schedule.ErrorCode
+                });
         }
 
         [HttpGet]
-        [Route("ongoingbackups")]
-        public virtual object OngoingBackupsQuery()
+        [Route("imcomingbackupsQuery")]
+        public virtual object IncomingBackupsQuery()
         {
-            return (from job in Context.Jobs
-                    join schedule in Context.Schedules on job.Id equals schedule.IdJob
-                    join configuration in Context.Configurations on job.IdConfiguration equals configuration.Id
-                    join client in Context.Clients on job.IdClient equals client.Id
-                    where schedule.BackupDate >= DateTime.Now
-                    select new
-                    {
-                        Datum = schedule.BackupDate,
-                        ClientName = client.Name,
-                        ConfigurationName = configuration.Name,
-                        Description = configuration.Description
-                    }).ToList();
+            return Context.Schedules
+                .Where(schedule => schedule.IdJob == schedule.Job.Id)
+                .Where(schedule => schedule.Job.Configuration.Id == schedule.Job.IdConfiguration)
+                .Where(Schedule => Schedule.Job.Client.Id == Schedule.Job.IdClient)
+                .Where(schedule => schedule.BackupDate >= DateTime.Now)
+                .Select(schedule => new 
+                {
+                    Datum = schedule.BackupDate,  
+                    ClientName = schedule.Job.Client.Name,
+                    ConfigurationName = schedule.Job.Configuration.Name,
+                    schedule.Job.Configuration.Description
+                });
         }
     }
 }
