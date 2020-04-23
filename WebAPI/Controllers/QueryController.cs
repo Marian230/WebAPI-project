@@ -33,17 +33,9 @@ namespace WebAPI.Controllers
         [Route("clientquery")]
         public virtual object ClientQuery()
         {
-            var query = (from j in Context.Jobs
-                         join co in Context.Configurations on j.IdConfiguration equals co.Id
-                         select new
-                         {
-                             IdClient = j.IdClient,
-                             IdConfiguration = j.IdConfiguration,
-                             Name = co.Name
-                         });
-
-            var myQuery = Context.Clients.GroupJoin(
-                query,
+            return (Context.Clients
+                .GroupJoin(Context.Jobs
+                .Where(jobs => jobs.IdConfiguration == jobs.Configuration.Id),
                 client => client.Id,
                 q => q.IdClient,
                 (client, q) => new
@@ -51,18 +43,16 @@ namespace WebAPI.Controllers
                     Client = client,
                     Configuration = q
                 })
-                .SelectMany(
-                x => x.Configuration.DefaultIfEmpty(),
+                .SelectMany(x => x.Configuration
+                .DefaultIfEmpty(),
                 (x, y) => new
                 {
-                    ID = x.Client.Id,
-                    Name = x.Client.Name,
-                    MAC = x.Client.MAC,
-                    Configuration = (y == null ? String.Empty : y.Name)
-                });
-
-            var returnQuery = myQuery
-                .GroupBy(client => client.ID)
+                    x.Client.Id,
+                    x.Client.Name,
+                    x.Client.MAC,
+                    Configuration = (y == null ? String.Empty : y.Configuration.Name)
+                })
+                .GroupBy(client => client.Id)
                 .ToList()
                 .Select(eg => new
                 {
@@ -70,29 +60,13 @@ namespace WebAPI.Controllers
                     Name = eg.First().Name,
                     MAC = eg.First().MAC,
                     Configuration = string.Join(",", eg.Select(i => i.Configuration))
-                });
-
-            return returnQuery;
+                }));
         }
 
         [HttpGet]
         [Route("completedbackups")]
         public virtual object CompletedBackupsQuery()
         {
-            /*return (from job in Context.Jobs
-                    join schedule in Context.Schedules on job.Id equals schedule.IdJob
-                    join configuration in Context.Configurations on job.IdConfiguration equals configuration.Id
-                    join client in Context.Clients on job.IdClient equals client.Id
-                    where schedule.BackupDate < DateTime.Now
-                    select new
-                    {
-                        Datum = schedule.BackupDate,
-                        ClientName = client.Name,
-                        ConfigurationName = configuration.Name,
-                        Description = configuration.Description, 
-                        Error = schedule.ErrorCode
-                    }).ToList();*/
-
             return Context.Schedules
                 .Where(schedule => schedule.IdJob == schedule.Job.Id)
                 .Where(schedule => schedule.Job.Configuration.Id == schedule.Job.IdConfiguration)
@@ -130,7 +104,24 @@ namespace WebAPI.Controllers
         [Route("newclients")]
         public virtual object NewClients()
         {
-            return Context.Clients.Where(client => client.DateOfLogin == null).ToList();
+            return Context.Clients
+                .Where(client => client.DateOfLogin == null).ToList();
+        }
+
+        [HttpGet]
+        [Route("loggedclients")]
+        public virtual object LoggedClients()
+        {
+            return Context.Clients
+                .Where(client => client.DateOfLogin != null).ToList();
+        }
+
+        [HttpGet]
+        [Route("getclient/{MAC}")]
+        public virtual object GetClient(string MAC)
+        {
+            return Context.Clients
+                .Where(client => client.MAC == MAC);
         }
     }
 }

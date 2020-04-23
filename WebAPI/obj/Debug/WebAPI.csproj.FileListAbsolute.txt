@@ -571,3 +571,11 @@ C:\Users\ps4ma\Desktop\temp\WebAPI\obj\Debug\WebAPI.csprojAssemblyReference.cach
 C:\Users\ps4ma\Desktop\temp\WebAPI\obj\Debug\WebAPI.csproj.CopyComplete
 C:\Users\ps4ma\Desktop\temp\WebAPI\obj\Debug\WebAPI.dll
 C:\Users\ps4ma\Desktop\temp\WebAPI\obj\Debug\WebAPI.pdb
+C:\Users\ps4ma\Desktop\temp\WebAPI\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\ps4ma\Desktop\temp\WebAPI\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\ps4ma\Desktop\temp\WebAPI\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\ps4ma\Desktop\temp\WebAPI\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\ps4ma\Desktop\temp\WebAPI\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\ps4ma\Desktop\temp\WebAPI\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\ps4ma\Desktop\temp\WebAPI\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\ps4ma\Desktop\temp\WebAPI\bin\System.IdentityModel.Tokens.Jwt.xml
