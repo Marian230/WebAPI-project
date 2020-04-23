@@ -13,9 +13,6 @@ namespace WebAPI.Models
         [Column("name")]
         public string Name { get; set; }
 
-        [Column("IP")]
-        public string IP { get; set; }
-
         [Column("MAC")]
         public string MAC { get; set; }
 

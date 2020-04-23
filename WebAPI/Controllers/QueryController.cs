@@ -57,7 +57,6 @@ namespace WebAPI.Controllers
                 {
                     ID = x.Client.Id,
                     Name = x.Client.Name,
-                    IP = x.Client.IP,
                     MAC = x.Client.MAC,
                     Configuration = (y == null ? String.Empty : y.Name)
                 });
@@ -69,7 +68,6 @@ namespace WebAPI.Controllers
                 {
                     Id = eg.Key,
                     Name = eg.First().Name,
-                    IP = eg.First().IP,
                     MAC = eg.First().MAC,
                     Configuration = string.Join(",", eg.Select(i => i.Configuration))
                 });
