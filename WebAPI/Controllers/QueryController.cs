@@ -112,7 +112,7 @@ namespace WebAPI.Controllers
         [Route("loggedclients")]
         public virtual object LoggedClients()
         {
-            return Context.Clients
+            return this.Context.Clients
                 .Where(client => client.DateOfLogin != null).ToList();
         }
 
@@ -120,8 +120,38 @@ namespace WebAPI.Controllers
         [Route("getclient/{MAC}")]
         public virtual object GetClient(string MAC)
         {
-            return Context.Clients
+            return this.Context.Clients
                 .Where(client => client.MAC == MAC);
+        }
+
+        [HttpGet]
+        [Route("getmyjobs/{id}")]
+        public virtual object GetMyJobs(int id)
+        {
+            return (from job in this.Context.Jobs
+                    join client in this.Context.Clients on job.IdClient equals client.Id
+                    join configuration in this.Context.Configurations on job.IdConfiguration equals configuration.Id
+
+                    from destSource in this.Context.DestSources
+                        .Where(destSource => configuration.Id == destSource.Id)
+                        .DefaultIfEmpty()
+                    from source in this.Context.Sources
+                        .Where(source => destSource.Id == source.Id)
+                        .DefaultIfEmpty()
+                    from destFtpServer in this.Context.DestFtpServers
+                        .Where(destFtpServer => destSource.Id == destFtpServer.Id)
+                        .DefaultIfEmpty()
+                    from destLocal in this.Context.DestLocals
+                        .Where(destLocal => destSource.Id == destLocal.Id)
+                        .DefaultIfEmpty()
+                    where client.Id == id
+                    select new
+                    {
+                        configuration,
+                        source,
+                        destFtpServer,
+                        destLocal
+                    });
         }
     }
 }

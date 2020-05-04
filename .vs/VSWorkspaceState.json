@@ -5,6 +5,6 @@
     "\\WebAPI\\Controllers",
     "\\WebAPI\\Models"
   ],
-  "SelectedNode": "\\WebAPI\\Controllers\\ControllerTemplate.cs",
+  "SelectedNode": "\\WebAPI\\Controllers\\QueryController.cs",
   "PreviewInSolutionExplorer": false
 }
