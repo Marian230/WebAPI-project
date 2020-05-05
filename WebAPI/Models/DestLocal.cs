@@ -10,8 +10,7 @@ namespace WebAPI.Models
     [Table("tbDestLocal")]
     public class DestLocal : ModelTemplate
     {
-        [ForeignKey("DestSource")]
-        public int IdDestSource { get; set; }
+        public int IdConfiguration { get; set; }
 
         [Column("path")]
         public string Path { get; set; }
@@ -19,6 +18,7 @@ namespace WebAPI.Models
         [Column("fileSuffix")]
         public string FileSuffix { get; set; }
 
-        public DestSource DestSource { get; set; }
+        [ForeignKey("IdConfiguration")]
+        public Configuration Configuration { get; set; }
     }
 }

@@ -276,10 +276,8 @@
     <Compile Include="Controllers\ConfigurationController.cs" />
     <Compile Include="Controllers\ControllerTemplate.cs" />
     <Compile Include="Controllers\DestFtpServerController.cs" />
-    <Compile Include="Controllers\DestGoogleDriveController.cs" />
     <Compile Include="Controllers\JobController.cs" />
     <Compile Include="Controllers\DestLocalController.cs" />
-    <Compile Include="Controllers\DestSourceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
@@ -296,9 +294,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Configuration.cs" />
     <Compile Include="Models\DestFtpServer.cs" />
-    <Compile Include="Models\DestGoogleDrive.cs" />
     <Compile Include="Models\DestLocal.cs" />
-    <Compile Include="Models\DestSource.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\ModelTemplate.cs" />
     <Compile Include="Models\MyContext.cs" />

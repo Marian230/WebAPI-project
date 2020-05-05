@@ -18,11 +18,7 @@ namespace WebAPI.Models
 
         public DbSet<DestFtpServer> DestFtpServers { get; set; }
 
-        public DbSet<DestGoogleDrive> DestGoogleDrives { get; set; }
-
         public DbSet<DestLocal> DestLocals { get; set; }
-
-        public DbSet<DestSource> DestSources { get; set; }
 
         public DbSet<Job> Jobs { get; set; }
 

@@ -10,7 +10,7 @@ namespace WebAPI.Models
     [Table("tbDestFtpServer")]
     public class DestFtpServer : ModelTemplate
     {
-        public int IdDestSource { get; set; }
+        public int IdConfiguration { get; set; }
 
         [Column("site")]
         public string Site { get; set; }
@@ -27,7 +27,7 @@ namespace WebAPI.Models
         [Column("fileSuffix")]
         public string FileSuffix { get; set; }
 
-        [ForeignKey("IdDestSource")]
-        public DestSource DestSource { get; set; }
+        [ForeignKey("IdConfiguration")]
+        public Configuration Configuration { get; set; }
     }
 }

@@ -10,12 +10,12 @@ namespace WebAPI.Models
     [Table("tbSource")]
     public class Source : ModelTemplate
     {
-        public int IdDestSource { get; set; }
+        public int IdConfiguration { get; set; }
 
         [Column("path")]
         public string Path { get; set; }
 
-        [ForeignKey("IdDestSource")]
-        public DestSource DestSource { get; set; }
+        [ForeignKey("IdConfiguration")]
+        public Configuration Configuration { get; set; }
     }
 }

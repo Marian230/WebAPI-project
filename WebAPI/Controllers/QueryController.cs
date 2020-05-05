@@ -131,18 +131,14 @@ namespace WebAPI.Controllers
             return (from job in this.Context.Jobs
                     join client in this.Context.Clients on job.IdClient equals client.Id
                     join configuration in this.Context.Configurations on job.IdConfiguration equals configuration.Id
-
-                    from destSource in this.Context.DestSources
-                        .Where(destSource => configuration.Id == destSource.Id)
-                        .DefaultIfEmpty()
                     from source in this.Context.Sources
-                        .Where(source => destSource.Id == source.Id)
+                        .Where(source => configuration.Id == source.Id)
                         .DefaultIfEmpty()
                     from destFtpServer in this.Context.DestFtpServers
-                        .Where(destFtpServer => destSource.Id == destFtpServer.Id)
+                        .Where(destFtpServer => configuration.Id == destFtpServer.Id)
                         .DefaultIfEmpty()
                     from destLocal in this.Context.DestLocals
-                        .Where(destLocal => destSource.Id == destLocal.Id)
+                        .Where(destLocal => configuration.Id == destLocal.Id)
                         .DefaultIfEmpty()
                     where client.Id == id
                     select new

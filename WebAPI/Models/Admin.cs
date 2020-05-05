@@ -13,10 +13,10 @@ namespace WebAPI.Models
         [Column("name")]
         public string Name { get; set; }
 
-        [Column("Surname")]
+        [Column("surname")]
         public string Surname { get; set; }
 
-        [Column("Password")]
+        [Column("password")]
         public string Password { get; set; }
 
         [Column("e-mail")]
