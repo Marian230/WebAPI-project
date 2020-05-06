@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         [Route("clientquery")]
         public virtual object ClientQuery()
         {
-            return (Context.Clients
+            return Context.Clients
                 .GroupJoin(Context.Jobs
                 .Where(jobs => jobs.IdConfiguration == jobs.Configuration.Id),
                 client => client.Id,
@@ -60,7 +60,7 @@ namespace WebAPI.Controllers
                     Name = eg.First().Name,
                     MAC = eg.First().MAC,
                     Configuration = string.Join(",", eg.Select(i => i.Configuration))
-                }));
+                });
         }
 
         [HttpGet]
@@ -125,29 +125,29 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("getmyjobs/{id}")]
-        public virtual object GetMyJobs(int id)
+        [Route("getmyjobs/{mac}")]
+        public virtual object GetMyJobs(string mac)
         {
-            return (from job in this.Context.Jobs
+            return from job in this.Context.Jobs
                     join client in this.Context.Clients on job.IdClient equals client.Id
                     join configuration in this.Context.Configurations on job.IdConfiguration equals configuration.Id
                     from source in this.Context.Sources
-                        .Where(source => configuration.Id == source.Id)
+                        .Where(source => configuration.Id == source.IdConfiguration)
                         .DefaultIfEmpty()
                     from destFtpServer in this.Context.DestFtpServers
-                        .Where(destFtpServer => configuration.Id == destFtpServer.Id)
+                        .Where(destFtpServer => configuration.Id == destFtpServer.IdConfiguration)
                         .DefaultIfEmpty()
                     from destLocal in this.Context.DestLocals
-                        .Where(destLocal => configuration.Id == destLocal.Id)
+                        .Where(destLocal => configuration.Id == destLocal.IdConfiguration)
                         .DefaultIfEmpty()
-                    where client.Id == id
+                    where client.MAC == mac
                     select new
                     {
                         configuration,
                         source,
                         destFtpServer,
                         destLocal
-                    });
+                    };
         }
     }
 }
