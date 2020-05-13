@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Http;
 using WebAPI.Models;
@@ -15,8 +16,11 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("homequery")]
-        public virtual object HomeQuery()
+        public virtual object HomeQuery(string token)
         {
+            if (!AuthenticationController.CheckToken(token))
+                return null;
+
             return (from cl in Context.Clients
                     join j in Context.Jobs on cl.Id equals j.IdClient
                     join c in Context.Configurations on j.IdConfiguration equals c.Id
@@ -31,8 +35,11 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("clientquery")]
-        public virtual object ClientQuery()
+        public virtual object ClientQuery(string token)
         {
+            if (!AuthenticationController.CheckToken(token))
+                return null;
+
             return Context.Clients
                 .GroupJoin(Context.Jobs
                 .Where(jobs => jobs.IdConfiguration == jobs.Configuration.Id),
@@ -65,8 +72,11 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("completedbackups")]
-        public virtual object CompletedBackupsQuery()
+        public virtual object CompletedBackupsQuery(string token)
         {
+            if (!AuthenticationController.CheckToken(token))
+                return null;
+
             return Context.Schedules
                 .Where(schedule => schedule.IdJob == schedule.Job.Id)
                 .Where(schedule => schedule.Job.Configuration.Id == schedule.Job.IdConfiguration)
@@ -84,8 +94,11 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("incomingbackups")]
-        public virtual object IncomingBackupsQuery()
+        public virtual object IncomingBackupsQuery(string token)
         {
+            if (!AuthenticationController.CheckToken(token))
+                return null;
+
             return Context.Schedules
                 .Where(schedule => schedule.IdJob == schedule.Job.Id)
                 .Where(schedule => schedule.Job.Configuration.Id == schedule.Job.IdConfiguration)
@@ -102,32 +115,44 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("newclients")]
-        public virtual object NewClients()
+        public virtual object NewClients(string token)
         {
+            if (!AuthenticationController.CheckToken(token))
+                return null;
+
             return Context.Clients
                 .Where(client => client.DateOfLogin == null).ToList();
         }
 
         [HttpGet]
         [Route("loggedclients")]
-        public virtual object LoggedClients()
+        public virtual object LoggedClients(string token)
         {
+            if (!AuthenticationController.CheckToken(token))
+                return null;
+
             return this.Context.Clients
                 .Where(client => client.DateOfLogin != null).ToList();
         }
 
         [HttpGet]
         [Route("getclient/{MAC}")]
-        public virtual object GetClient(string MAC)
+        public virtual object GetClient(string token, string MAC)
         {
+            if (!AuthenticationController.CheckToken(token))
+                return null;
+
             return this.Context.Clients
                 .Where(client => client.MAC == MAC);
         }
 
         [HttpGet]
         [Route("getmyjobs/{mac}")]
-        public virtual object GetMyJobs(string mac)
+        public virtual object GetMyJobs(string token, string mac)
         {
+            if (!AuthenticationController.CheckToken(token))
+                return null;
+
             return from job in this.Context.Jobs
                     join client in this.Context.Clients on job.IdClient equals client.Id
                     join configuration in this.Context.Configurations on job.IdConfiguration equals configuration.Id

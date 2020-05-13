@@ -17,24 +17,33 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("")]
-        public virtual IEnumerable<T> Get() // Return all
+        public virtual IEnumerable<T> Get(string token) // Return all
         {
-            return (this.DbSet as IEnumerable<T>);
+            if (AuthenticationController.CheckToken(token))
+                return (this.DbSet as IEnumerable<T>);
+            else
+                return null;
         }
 
         [HttpGet]
         [Route("id:int")]
-        public virtual T Get(int Id) // Return specific
+        public virtual T Get(string token, int Id) // Return specific
         {
-            return (T)this.DbSet.Find(Id);
+            if (AuthenticationController.CheckToken(token))
+                return (T)this.DbSet.Find(Id);
+            else
+                return null;
         }
 
         [HttpPost]
         [Route("item:T")]
-        public virtual void Post(T item) // Add
+        public virtual void Post(string token, T item) // Add
         {
-            if (item == null)
+            if (!AuthenticationController.CheckToken(token))
                 return;
+
+            if (item == null)
+            return;
 
             this.DbSet.Add(item);
             this.Context.SaveChanges();
@@ -42,8 +51,11 @@ namespace WebAPI.Controllers
 
         [HttpPut]
         [Route("item:T")]
-        public virtual void Put(T item) // Edit
+        public virtual void Put(string token, T item) // Edit
         {
+            if (!AuthenticationController.CheckToken(token))
+                return;
+
             if (item == null)
                 return;
 
@@ -58,8 +70,11 @@ namespace WebAPI.Controllers
 
         [HttpDelete]
         [Route("id:int")]
-        public virtual void Delete(int id)
+        public virtual void Delete(string token, int id)
         {
+            if (!AuthenticationController.CheckToken(token))
+                return;
+
             T item = (T)this.DbSet.Find(id);
 
             if (item == null)
